@@ -1,0 +1,71 @@
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import List, Optional
+from datetime import date
+
+app = FastAPI()
+
+# --- Data Models ---
+class Stakeholder(BaseModel):
+    id: int
+    name: str
+    type: str  # farmer, buyer, researcher, policymaker
+    contact: Optional[str] = None
+
+class WheatProductionData(BaseModel):
+    year: int
+    region: str
+    planted_area: float
+    harvested_area: float
+    non_harvested_area: float
+    yield_tonnes_per_ha: float
+    climate_frost_events: int
+    climate_drought_index: float
+    wheat_price: float
+
+class ImpactPathwayNode(BaseModel):
+    id: int
+    label: str
+    type: str  # climate, yield, socio-economic, etc.
+    value: float
+    year: int
+
+class ImpactPathwayEdge(BaseModel):
+    source: int
+    target: int
+    relation: str
+
+# --- In-memory DB (for demo) ---
+stakeholders = []
+wheat_data = []
+impact_nodes = []
+impact_edges = []
+
+# --- API Endpoints ---
+
+@app.get("/dashboard/production", response_model=List[WheatProductionData])
+def get_production_data(region: Optional[str] = None):
+    if region:
+        return [d for d in wheat_data if d.region == region]
+    return wheat_data
+
+@app.get("/crm/stakeholders", response_model=List[Stakeholder])
+def get_stakeholders():
+    return stakeholders
+
+@app.post("/crm/stakeholders", response_model=Stakeholder)
+def add_stakeholder(stakeholder: Stakeholder):
+    stakeholders.append(stakeholder)
+    return stakeholder
+
+@app.get("/impact/pathway/nodes", response_model=List[ImpactPathwayNode])
+def get_impact_nodes(year: Optional[int] = None):
+    if year:
+        return [n for n in impact_nodes if n.year == year]
+    return impact_nodes
+
+@app.get("/impact/pathway/edges", response_model=List[ImpactPathwayEdge])
+def get_impact_edges():
+    return impact_edges
+
+# Add more endpoints as needed for analytics, regression models, etc.
