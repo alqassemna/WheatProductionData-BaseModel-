@@ -1,0 +1,12 @@
+from datetime import date
+from typing import Optional, List
+from sqlalchemy.orm import Query
+
+def apply_filters(query: Query, start_date: Optional[date], end_date: Optional[date], types: Optional[List[str]]):
+    if start_date:
+        query = query.filter(WheatProductionData.date >= start_date)
+    if end_date:
+        query = query.filter(WheatProductionData.date <= end_date)
+    if types:
+        query = query.filter(WheatProductionData.type.in_(types))
+    return query
