@@ -1,0 +1,87 @@
+wheat-innovation-system/
+│
+├── backend/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py                 # FastAPI application entry
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── base.py
+│   │   │   ├── stakeholder.py
+│   │   │   ├── wheat_data.py
+│   │   │   ├── impact_pathway.py
+│   │   ├── api/
+│   │   │   ├── __init__.py
+│   │   │   ├── dashboard.py
+│   │   │   ├── crm.py
+│   │   │   ├── impact.py
+│   │   │   ├── auth.py
+│   │   ├── core/
+│   │   │   ├── __init__.py
+│   │   │   ├── config.py
+│   │   │   ├── database.py
+│   │   │   ├── security.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── stakeholder.py
+│   │   │   ├── wheat_data.py
+│   │   │   ├── impact_pathway.py
+│   │   ├── services/
+│   │   │   ├── __init__.py
+│   │   │   ├── analytics.py
+│   │   │   ├── regression.py
+│   │   ├── utils/
+│   │   │   ├── __init__.py
+│   │   │   ├── filters.py
+│   │   ├── tests/
+│   │       ├── __init__.py
+│   │       ├── test_dashboard.py
+│   │       ├── test_crm.py
+│   │       ├── test_impact.py
+│   ├── alembic/                   # DB migrations
+│   ├── requirements.txt
+│   ├── Dockerfile
+│
+├── frontend/
+│   ├── src/
+│   │   ├── App.vue
+│   │   ├── main.ts
+│   │   ├── router/
+│   │   │   └── index.ts
+│   │   ├── store/
+│   │   │   └── index.ts
+│   │   ├── components/
+│   │   │   ├── Dashboard/
+│   │   │   │   ├── Dashboard.vue
+│   │   │   │   ├── ProductionChart.vue
+│   │   │   │   ├── WheatMap.vue
+│   │   │   │   ├── Filters.vue
+│   │   │   ├── CRM/
+│   │   │   │   ├── CRM.vue
+│   │   │   │   ├── StakeholderList.vue
+│   │   │   │   ├── StakeholderForm.vue
+│   │   │   ├── ImpactPathway/
+│   │   │   │   ├── ImpactPathway.vue
+│   │   │   │   ├── ImpactGraph.vue
+│   │   │   ├── shared/
+│   │   │   │   ├── DatePicker.vue
+│   │   │   │   ├── SelectType.vue
+│   │   ├── views/
+│   │   │   ├── DashboardView.vue
+│   │   │   ├── CRMView.vue
+│   │   │   ├── ImpactView.vue
+│   │   ├── api/
+│   │   │   ├── index.ts
+│   │   ├── assets/
+│   │   ├── utils/
+│   │   │   └── filters.ts
+│   │   ├── styles/
+│   │   │   └── main.css
+│   ├── public/
+│   ├── vite.config.ts
+│   ├── package.json
+│   ├── Dockerfile
+│
+├── docker-compose.yml
+├── README.md
+└── .env
